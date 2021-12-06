@@ -1,10 +1,33 @@
+
+#   ------------------------------------------
+#   |                                        |
+#   |                                        |
+#   --------------------->--------------------
+#  T - Turtle location
+#  default angle - 0 degrees (>)
+# TODO:
+# 1. Do not take angle as argument since rectangles are always 90 degrees
+# 2. Rename c arg to fill_color=None
+
+# TODO: Assignment 1
+# 0. Rectangles should start from one direction only
+# 1. A black colored boundary around the whole flag
+# 2. Draw a flag pole on the left
+# 3. White rectangle should be same width as the others
+# 4. Handle "small" and "large" as arguments for size of the flag
+
+# TODO: Assignment 2
+# 1. Instead of separate functions: draw_small_flag(), draw_medium_flag().. etc.,
+#    have only one function
+#    Vary the length, breadth, radius etc. based on the flag size.
+# 2. 100 = medium
+#    70
+#    150
+#    130 
 import turtle
 flag = turtle.Turtle()
 flag.speed(10)
 flag.pensize(2)
-
-# TODO:
-# 1. Let argument names be informative. Eg. radius instead of 'r'
 
 def draw_ashok_chakra(radius):
     flag.color("blue")
@@ -21,23 +44,6 @@ def lookup(distance):
     flag.penup()
     flag.fd(distance)
     flag.pendown()
-
-#   ------------------------------------------
-#   |                                        |
-#   |                                        |
-#   --------------------->--------------------
-#  T - Turtle location
-#  default angle - 0 degrees (>)
-# TODO:
-# 1. Do not take angle as argument since rectangles are always 90 degrees
-# 2. Rename c arg to fill_color=None
-
-# TODO:
-# 0. Rectangles should start from one direction only
-# 1. A black colored boundary around the whole flag
-# 2. Draw a flag pole on the left
-# 3. White rectangle should be same width as the others
-# 4. Handle "small" and "large" as arguments for size of the flag
 
 def draw_rectangles(length, breadth, color=None):
     flag.color(color)
@@ -74,73 +80,39 @@ def draw_pole(length,breadth,distance,color,radius):
     flag.end_fill()
     draw_rectangles(length,breadth,"grey")
 
+# class Sizes():
+#     radius: int
+#     distance: int
+#     length: int
+#     breadth: int
+#     color: str
+# small_size = Sizes(20, 15, 400, 70)
+# medium_size = Sizes(30, 20, 600, 100)
+# large_size = Sizes(40, 25, 800, 130)
 
-def draw_small_flag(size="small"):
-#moving the turtle initial position to 100 units upwards
+def draw_flag(size=100):
+    # sizes = {"small": small_size,
+    #          "medium": medium_size,
+    #          "large": large_size}
+    # current_size = sizes[size]
     flag.lt(90)
-    lookup(100)
+    lookup(100*size/100)
     flag.rt(90)
-#now initialy turtle is facing towards right
-    draw_ashok_chakra(20)
+    draw_ashok_chakra(30*size/100)
     flag.rt(90)
-    lookup(15)
+    lookup(20*size/100)
     flag.lt(90)
-    draw_rectangles(400, 70, "green")
+    draw_rectangles(600*size/100,100*size/100, "green")
     flag.lt(90)
-    lookup(140)
+    lookup(200*size/100)
     flag.rt(90)
-    draw_rectangles(400, 70, "orange")
+    draw_rectangles(600*size/100, 100*size/100, "orange")
     flag.lt(90)
-    lookup(15)
-#drawing the borders of the flag
-    draw_border(430,240)
-    draw_pole(10,900,225,"brown",12)
+    lookup(15*size/100)
+    draw_border(630*size/100,330*size/100)
+    draw_pole(15*size/100,900*size/100,325*size/100,"brown",16*size/100)
 
-
-
-def draw_medium_flag(size="medium"):
-    flag.lt(90)
-    lookup(100)
-    flag.rt(90)
-    draw_ashok_chakra(30)
-    flag.rt(90)
-    lookup(20)
-    flag.lt(90)
-    draw_rectangles(600, 100, "green")
-    flag.lt(90)
-    lookup(200)
-    flag.rt(90)
-    draw_rectangles(600, 100, "orange")
-    flag.lt(90)
-    lookup(15)
-    draw_border(630,330)
-    draw_pole(15,900,325,"brown",16)
-
-
-def draw_large_flag(size="large"):
-    flag.lt(90)
-    lookup(100)
-    flag.rt(90)
-    draw_ashok_chakra(40)
-    flag.rt(90)
-    lookup(25)
-    flag.lt(90)
-    draw_rectangles(800, 130, "green")
-    flag.lt(90)
-    lookup(260)
-    flag.rt(90)
-    draw_rectangles(800, 130, "orange")
-    flag.lt(90)
-    lookup(15)
-    draw_border(830,420)
-    draw_pole(20,900,435,"brown",20)
-
-
-choice=int(input("Enter the size of the flag. 1 for small, 2 for medium and 3 for large:  "))
-if choice==1:
-    draw_small_flag(size="small")
-elif choice==2:
-    draw_medium_flag(size="medium")
-else:
-    draw_large_flag(size="large")
+size=int(input("Enter the size of the flag"))
+draw_flag(size)
+flag.hideturtle()
 turtle.mainloop()
