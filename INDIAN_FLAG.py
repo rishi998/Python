@@ -25,16 +25,26 @@
 #    150
 #    130 
 import turtle
+import math
 flag = turtle.Turtle()
 flag.speed(10)
 flag.pensize(2)
-
-def draw_ashok_chakra(radius):
+def draw_ashok_chakra(radius,size):
     flag.color("blue")
-    for i in range(24):
-        flag.fd(radius)
-        flag.bk(radius)
-        flag.lt(15)
+    count=0
+    if size<100:
+        for i in range(24):
+           flag.fd(radius)
+           flag.bk(radius)
+           flag.lt(15*100/size)
+           count+=1
+           if count>size*24/100:
+              break
+    else:
+        for i in range(24):
+           flag.fd(radius)
+           flag.bk(radius)
+           flag.lt(15)
     flag.rt(90)
     flag.fd(radius)
     flag.lt(90)
@@ -95,10 +105,11 @@ def draw_flag(size=100):
     #          "medium": medium_size,
     #          "large": large_size}
     # current_size = sizes[size]
+
     flag.lt(90)
     lookup(100*size/100)
     flag.rt(90)
-    draw_ashok_chakra(30*size/100)
+    draw_ashok_chakra(30*size/100,size)
     flag.rt(90)
     lookup(20*size/100)
     flag.lt(90)
@@ -112,7 +123,7 @@ def draw_flag(size=100):
     draw_border(630*size/100,330*size/100)
     draw_pole(15*size/100,900*size/100,325*size/100,"brown",16*size/100)
 
-size=int(input("Enter the size of the flag"))
+size=float(input("Enter the size of the flag"))
 draw_flag(size)
 flag.hideturtle()
 turtle.mainloop()
