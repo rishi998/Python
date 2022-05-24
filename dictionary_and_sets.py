@@ -11,7 +11,6 @@ myDict={
 # print(myDict['anotherdict']['Rishi'])
 updatedict={
     "YashGarg":"friend",
-    "Ishita":"friend"
 }
 myDict.update(updatedict)
 # print(myDict)
